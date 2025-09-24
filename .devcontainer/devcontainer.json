@@ -1,0 +1,39 @@
+{
+	"name": "Java & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"customizations": {
+		"vscode": {
+			"settings": { 
+				"#terminal.integrated.defaultProfile.linux#": "/bin/bash",
+				"java.jdt.ls.java.home": "/docker-java-home",
+				"java.import.gradle.home": "/opt/gradle",
+				"java.import.gradle.java.home": "/docker-java-home",
+
+				"java.format.comments.enabled": false,
+				"editor.formatOnSave": false,
+				"java.completion.importOrder": [
+					"com",
+					"java",
+					"javax",
+					"org"
+				],
+				"workbench.iconTheme": "material-icon-theme",
+				"workbench.colorTheme": "Dracula Soft"
+			},
+
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vmware.vscode-boot-dev-pack",
+				"vscjava.vscode-gradle",
+				"DavidAnson.vscode-markdownlint",
+				"GabrielBB.vscode-lombok",
+				"dracula-theme.theme-dracula",
+				"PKief.material-icon-theme",
+				"streetsidesoftware.code-spell-checker"
+			]
+		}
+		
+	}
+}
