@@ -39,9 +39,3 @@ services:
       - "5050:80"
     depends_on:
       - db
-
-  postman:
-    container_name: postman
-    image: postman/newman
-    volumes:
-      - ../..:/workspaces:cached

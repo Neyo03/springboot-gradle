@@ -13,7 +13,7 @@ public class UpdateTaskRequest {
     public UpdateTaskRequest(String title, String description, TaskStatus status) {
         this.title = title;
         this.description = description;
-        this.status = status;
+        this.status = status != null ? status : TaskStatus.TODO;
     }
 
     public String getTitle() {
