@@ -4,6 +4,7 @@ import com.example.demo.dto.model.TaskDto;
 import com.example.demo.dto.request.task.CreateTaskRequest;
 import com.example.demo.dto.request.task.UpdateTaskRequest;
 import com.example.demo.model.Task;
+import com.example.demo.model.User;
 import com.example.demo.repository.TaskRepository;
 import com.example.demo.service.TaskService;
 
@@ -35,10 +36,13 @@ public class TaskServiceImpl implements TaskService {
     };
 
     @Override
-    public Optional<TaskDto> createTask(CreateTaskRequest request) {
+    public Optional<TaskDto> createTask(CreateTaskRequest request, User user) {
+        
         Task task = new Task()
             .setTitle(request.getTitle())
-            .setDescription(request.getDescription());
+            .setDescription(request.getDescription())
+            .setCreatedBy(user)
+        ;
         Task savedTask = taskRepository.save(task);
         return Optional.of(new TaskDto(savedTask));
     }

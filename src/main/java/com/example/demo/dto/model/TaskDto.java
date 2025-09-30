@@ -10,6 +10,7 @@ public class TaskDto {
     private String description;
     private TaskStatus status = TaskStatus.TODO;
     private Timestamps timestamps;
+    private UserDto createdBy;
 
     public TaskDto() {}
 
@@ -19,6 +20,7 @@ public class TaskDto {
         this.description = task.getDescription();
         this.status = task.getStatus();
         this.timestamps = task.getTimestamps();
+        this.createdBy = new UserDto(task.getCreatedBy());
     }
 
     public Long getId() { return id; }
@@ -36,6 +38,9 @@ public class TaskDto {
     public Timestamps getTimestamps() { return timestamps; }
     public void setTimestamps(Timestamps timestamps) { this.timestamps = timestamps; }
 
+    public UserDto getCreatedBy() { return createdBy; }
+    public void setCreatedBy(UserDto createdBy) { this.createdBy = createdBy; }
+
     @Override
     public String toString() {
         return "TaskDto{" +
@@ -44,6 +49,7 @@ public class TaskDto {
                 ", description='" + description + '\'' +
                 ", status=" + status +
                 ", timestamps=" + timestamps +
+                ", createdBy=" + createdBy.toString() +
                 '}';
     }
 }

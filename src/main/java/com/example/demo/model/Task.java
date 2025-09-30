@@ -2,15 +2,19 @@ package com.example.demo.model;
 
 import com.example.demo.model.embeds.Timestamps;
 import com.example.demo.model.enums.TaskStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,4 +42,9 @@ public class Task {
 
     @Embedded
     private Timestamps timestamps = new Timestamps();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "created_by", nullable = false)
+    @JsonIgnoreProperties({"tasks", "password"})
+    private User createdBy;
 }

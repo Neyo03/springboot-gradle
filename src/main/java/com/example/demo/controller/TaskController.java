@@ -4,11 +4,13 @@ import com.example.demo.dto.model.TaskDto;
 import com.example.demo.dto.request.task.CreateTaskRequest;
 import com.example.demo.dto.request.task.UpdateTaskRequest;
 import com.example.demo.dto.response.Response;
+import com.example.demo.security.CustomUserDetails;
 import com.example.demo.service.TaskService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,9 +42,9 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<TaskDto>> createTask(@RequestBody CreateTaskRequest request) {
+    public ResponseEntity<Response<TaskDto>> createTask(@RequestBody CreateTaskRequest request, @AuthenticationPrincipal CustomUserDetails currentUser) {
         try {
-            TaskDto createdTask = taskService.createTask(request).map(task -> task).orElse(null);
+            TaskDto createdTask = taskService.createTask(request, currentUser.getUser()).map(task -> task).orElse(null);
             return ResponseEntity.ok((Response.<TaskDto>ok().setPayload(createdTask)));
         } catch (Exception e) {
            return ResponseEntity.internalServerError().body(Response.<TaskDto>exception().setErrors(e.getMessage()));
